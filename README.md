@@ -85,15 +85,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I made 4 HTML pages: index, home, saved, and account
+- [x] **Proper HTML element usage** - I followed the standard by including a head, body, header, main, and footer elements
+- [x] **Links** - I added links that direct to the HTML pages and added my github link into the footer 
+- [x] **Text** - I added text where it will be displayed on each page
+- [x] **3rd party API placeholder** - I'm not sure if my application has this
+- [x] **Images** - I added icon images for the navigation elements
+- [x] **Login placeholder** - On Index.html I added input boxes for username and password and also buttons to proceed to home
+- [x] **DB data placeholder** - On the saved.html is where users saved movie titles will be displayed and can be marked as watched
+- [x] **WebSocket placeholder** - On the home page, users top 3 movies will be posted to other users home page with their ranking, movie title, rating, and the ability to save the titles to your own account.
 
 ## 🚀 CSS deliverable
 
