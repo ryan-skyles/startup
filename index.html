@@ -3,30 +3,97 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Keania+One&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Keania+One&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="index.css" />
     </head>
     <body>
-        <header>
+        <header> 
             <h1>WhatyaWhatchin</h1>
         </header>
         <main>
-            <h>Welcome</h>
-            <form method="get" action="home.html">
-                <div>
-                    <span>Username</span>
-                    <input type="text" placeholder="enter email" />
+            <!-- <div class="container">
+                <div class="Login-form">
+                    <h2>Welcome</h2>
                 </div>
-                <div>
-                    <span>Password</span>
-                    <input type="password" /> 
+            </div> -->
+            <!-- <form method="get" action="CSShome.html">
+                <div class="d-grid gap-2">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="Username" fdprocessedid="rhnlc">
+                    <label for="floatingInput">Username</label> -->
+                    <!-- <input type="password" class="form-control" id="floatingInput" placeholder="Password" fdprocessedid="cjjf1f"> -->
+                    <!-- <label for="floatingInput">Password</label> -->
+                <!-- </div>
+                <button class="btn btn-primary" type="button">Sign in</button>
+                <button class="btn btn-outline-secondary" type="button">Create</button>
+            </form>         -->
+            <div class="modal-content rounded-4 shadow">
+                <!-- <div class="modal-header p-5 pb-4 border-bottom-0">
+                  <h1 class="fw-bold mb-0 fs-2">Whatya Watchin?</h1>
+                </div> -->
+                <div class="modal-body p-5 pt-0">
+                  <form class="get" action="home.html">
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" fdprocessedid="0yatf">
+                      <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" fdprocessedid="vllqp">
+                      <label for="floatingPassword">Password</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="8v8edk">Sign in</button>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="8v8edk">Create Account</button>
+                  </form>
                 </div>
-                <button type="submit">Play</button>
-                <button type="submit">New User</button>
-            </form>        
-        </main>
-    
+              </div>
+        </main> 
         <footer>
             <span class="text-reset">Author:</span>
             <a href="https://github.com/ryan-skyles/startup">Ryan Skyles</a>
-        </footer>  
+        </footer> 
     </body>
 </html>
+
+<!-- <div class="modal-content rounded-4 shadow">
+    <div class="modal-header p-5 pb-4 border-bottom-0">
+      <h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" fdprocessedid="zr0qp"></button>
+    </div>
+
+    <div class="modal-body p-5 pt-0">
+      <form class="">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" fdprocessedid="0yatf">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" fdprocessedid="vllqp">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="8v8edk">Sign up</button>
+        <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+        <hr class="my-4">
+        <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit" fdprocessedid="ahxur6">
+          <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>
+          Sign up with Twitter
+        </button>
+        <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit" fdprocessedid="ns1j8x">
+          <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
+          Sign up with Facebook
+        </button>
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit" fdprocessedid="zomve9">
+          <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"></use></svg>
+          Sign up with GitHub
+        </button>
+      </form>
+    </div>
+  </div> -->
