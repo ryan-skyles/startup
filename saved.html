@@ -6,34 +6,82 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Keania+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Keania+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="mainheader.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous"/>
+        <style>
+            body{
+                height: 150vh
+            }
+            .nav-link {
+            color: rgb(223, 186, 0)
+            }
+            .nav-link:hover {
+                color: rgb(139, 116, 0);
+            }
+            .btn-outline-primary {
+                color: rgb(223, 186, 0);
+                border-color: rgb(223, 186, 0);
+            }
+            .btn-outline-primary:hover {
+                background-color:rgb(255, 213, 0);
+                border-color:rgb(223, 186, 0);
+                color: black;
+            }
+            a h1 {
+                color:rgb(223, 186, 0)
+            }
+            a:hover h1 {
+                color:rgb(223, 186, 0)
+            }
+            .container {
+                font-family: 'Alumni Sans Pinstripe', sans-serif;
+                font-size: x-large;
+                font-weight: bolder;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .btn-primary{
+                --bs-btn-font-size: larger;
+                --bs-btn-font-weight: 700;
+                --bs-btn-color: #000000;
+                --bs-btn-bg:rgb(223, 186, 0);
+                --bs-btn-border-color: rgb(223, 186, 0);
+                --bs-btn-hover-color:rgba(223, 186, 0, 0.582);
+                --bs-btn-hover-bg: rgb(223, 186, 0);
+                --bs-btn-hover-border-color: #000000;
+                --bs-btn-max-width: 40px;
+            }
+            .custom-margin {
+                margin-top: 20px;
+            }
+            .bi {
+                --bs-btn-font-color: #000;
+
+            }
+        </style>
     </head>
 
     <body>
-        <header class="container-fluid">
-            <nav class="navbar fixed-top navbar-dark">
-                <menu class="navbar-nav">
-                    <li class="nav-item">
-                      <h2>WhatyaWatchin</h2> 
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" href="index.html">Login</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="saved.html">Saved</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="account.html">Account</a>
-                    </li>
-                </menu>
-            </nav>
-          </header>
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="home.html" class="d-inline-flex link-body-emphasis text-decoration-none"><h1>WhatyaWatchin</h1></a>
+            </div>
+            <menu class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="home.html" class="nav-link px-4">Home</a></li>
+                <li><a href="saved.html" class="nav-link px-4">Saved</a></li>
+                <li><a href="account.html" class="nav-link px-4">Account</a></li>
+            </menu>
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2">Login</button>
+            </div>
+        </header>
         <!-- Database Placeholder -->
-        <main>
-            <section>
+        <main class="container">
+            <!-- <section>
                 <p>Saved</p>
                 <ul>
                     <li>Gladiator 2</li>
@@ -47,9 +95,51 @@
                     <li>Nacho Libre</li>
                         <button>Watched</button>
                 </ul>
-            </section>
+            </section> -->
+            <iframe src="https://www.google.com/search?q=your+search+term" 
+                        width="560px" height="400px" style="border:none;">
+            </iframe>
+            <div>
+                <h4 class="fst-italic"></h4>
+                <ul class="list-unstyled">
+                  <li class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 text-decoration-none border-top">
+                    <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                    <div class="col-lg-8">
+                        <h1 class="mb-0">Movie Title</h1>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-3" type="button">watched</button>
+                  </li>
+                  <li class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 text-decoration-none border-top">
+                    <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                    <div class="col-lg-8">
+                        <h1 class="mb-0">Movie Title</h1>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-3" type="button">watched</button>
+                  </li>
+                  <li class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 text-decoration-none border-top">
+                    <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                    <div class="col-lg-8">
+                        <h1 class="mb-0">Movie Title</h1>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-3" type="button">watched</button>
+                  </li>
+                  <li class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 text-decoration-none border-top">
+                    <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                    <div class="col-lg-8">
+                        <h1 class="mb-0">Movie Title</h1>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-3" type="button">watched</button>
+                  </li>
+                  <li class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 text-decoration-none border-top">
+                    <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                    <div class="col-lg-8">
+                        <h1 class="mb-0">Movie Title</h1>
+                    </div>
+                    <button class="btn btn-primary rounded-pill px-3" type="button">watched</button>
+                  </li>
+                </ul>
+              </div>
         </main>
-        <hr />
         <footer>
             <span class="text-reset">Author: </span>
             <a href="https://github.com/ryan-skyles/startup">Ryan Skyles</a>
