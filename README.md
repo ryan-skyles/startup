@@ -99,12 +99,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - I styled the header with a new font and made it fixed to the top of the page. The body has a gradient image background and is flexable to the scroller. The footer is also styled and fixed to the bottom. 
+- [x] **Navigation elements** - I integrated a link to the home page with the title card of the page. I made link to home, save, and account as the main pages centered in the header, and made a seperate, far-right login link button. 
+- [x] **Responsive to window resizing** - It is responsive to window resizing but could use some fine tuning for small screens like phones.
+- [x] **Application elements** - Most application elements are put into containers and displayed as such. The home page is where users will see other users input and rankings of moves with a save button next to each move title. The saved page displays the movies that the user saved with a button to click when that movie is watched (I hope to add a remove button too) and at the top is a quick google search bar to search the movies you saved without leaving the page, The account page displays the users profile picture and their ranked movies in a conatiner. This is where the user changes their titles and rankings through the lower portion of the account page.
+- [x] **Application text content** - Most of the text is placeholders for what will eventually be added in but all button elements and links have their appropriate labels
+- [x] **Application images** - Most of the images are used in helping to naviagate and understand the rankings and also the save buttons on the homepage (I hope to add pictures to maybe the saved page)
 
 ## 🚀 React part 1: Routing deliverable
 

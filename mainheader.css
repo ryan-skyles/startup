@@ -11,9 +11,6 @@ html, body{
 header {
     font-family: 'Keania One', sans-serif;
     color: rgb(223, 186, 0);
-    /* padding: 10px 0px; */
-    /* border-radius:8px; */
-    /* height: 100vh; */
     padding: 10px;
     margin: 0;
     top: 0;
@@ -33,41 +30,10 @@ body{
     padding-top: 80px;
     width: 100%;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; */
 }
 menu{
     font-size: larger;
 }
-/* nav h2{
-    font-size: xx-large;
-}
-nav menu{
-    display: flex;
-    justify-content: left;
-    list-style-type: none;
-}
-nav li{
-    margin:0 15px;
-    font-size: x-large;
-}
-nav a {
-    color: rgb(223, 186, 0);
-    text-decoration: none;
-    font-size: 16px; 
-}
-nav a:hover {
-    color:#740000
-}
-nav a img{
-    width:40px;
-    height:30px;
-    margin-right:2px;
-} */
-
 .nav-link {
     color: rgb(223, 186, 0)
 }
