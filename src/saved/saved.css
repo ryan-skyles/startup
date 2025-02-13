@@ -1,0 +1,50 @@
+body{
+    height: 150vh
+}
+.nav-link {
+color: rgb(223, 186, 0)
+}
+.nav-link:hover {
+    color: rgb(139, 116, 0);
+}
+.btn-outline-primary {
+    color: rgb(223, 186, 0);
+    border-color: rgb(223, 186, 0);
+}
+.btn-outline-primary:hover {
+    background-color:rgb(255, 213, 0);
+    border-color:rgb(223, 186, 0);
+    color: black;
+}
+a h1 {
+    color:rgb(223, 186, 0)
+}
+a:hover h1 {
+    color:rgb(223, 186, 0)
+}
+.container {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: x-large;
+    font-weight: bolder;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.btn-primary{
+    --bs-btn-font-size: larger;
+    --bs-btn-font-weight: 700;
+    --bs-btn-color: #000000;
+    --bs-btn-bg:rgb(223, 186, 0);
+    --bs-btn-border-color: rgb(223, 186, 0);
+    --bs-btn-hover-color:rgba(223, 186, 0, 0.582);
+    --bs-btn-hover-bg: rgb(223, 186, 0);
+    --bs-btn-hover-border-color: #000000;
+    --bs-btn-max-width: 40px;
+}
+.custom-margin {
+    margin-top: 20px;
+}
+.bi {
+    --bs-btn-font-color: #000;
+
+}

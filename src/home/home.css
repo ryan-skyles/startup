@@ -1,0 +1,32 @@
+body{
+    height: 200vh;
+}
+.nav-link {
+    color: rgb(223, 186, 0)
+}
+.nav-link:hover {
+    color: rgb(139, 116, 0);
+}
+.btn-outline-primary {
+    color: rgb(223, 186, 0);
+    border-color: rgb(223, 186, 0);
+}
+.btn-outline-primary:hover {
+    background-color:rgb(255, 213, 0);
+    border-color:rgb(223, 186, 0);
+    color: black;
+}
+a h1 {
+    color:rgb(223, 186, 0)
+}
+a:hover h1 {
+    color:rgb(223, 186, 0)
+}
+.container {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: x-large;
+    font-weight:bolder;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
