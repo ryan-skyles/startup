@@ -3,7 +3,7 @@ import './home.css';
 
 export function Home() {
   return (
-    <main className="container">
+    <main className = 'container'>
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h3 className="border-bottom pb-2 mb-0">@Username</h3>
         <div className="d-flex text-body-secondary pt-3">
