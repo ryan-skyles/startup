@@ -110,9 +110,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [x] **Bundled using Vite** - I followed the example given with Simon and added a package.json and package-lock.json file. I was successful in using npm as well
+- [x] **Components** - login, home, saved, and account are all components. Home will house the websocket data where placeholders are currently, saved will use an outside resource to bring in information about movies, and account will have ratability of movies.
+- [x] **Router** - Routing between login and voting components was successful
 
 ## 🚀 React part 2: Reactivity
 
