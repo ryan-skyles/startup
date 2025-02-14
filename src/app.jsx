@@ -9,7 +9,7 @@ import { Saved } from './saved/saved';
 import { Account } from './account/account';
 
 export default function App() {
-    return <div classNameName="body bg-dark text-light">
+    return <div className="body bg-dark text-light">
             <BrowserRouter>
                 <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                     <div className="col-md-3 mb-2 mb-md-0">
@@ -42,8 +42,8 @@ export default function App() {
                 </header>
 
                 <Routes>
-                    <Route path='/' element={<Login />} exact />
-                    <Route path='/home' element={<Home />} />
+                    <Route path='/' element={<Home />} exact />
+                    <Route path='/login' element={<Login />} />
                     <Route path='/saved' element={<Saved />} />
                     <Route path='/account' element={<Account />} />
                     <Route path='*' element={<NotFound />} />
