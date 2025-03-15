@@ -19,9 +19,7 @@ function App() {
             <div className="body bg-dark text-light">
                 <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
                     <div className="col-md-3 mb-2 mb-md-0">
-                        <NavLink className="nav-link px-4" to="home">
                             <h1>WhatyaWatchin</h1>
-                        </NavLink>
                     </div>
                     <menu className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                         {authState == AuthState.Authenticated && ( 

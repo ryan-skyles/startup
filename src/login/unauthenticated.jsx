@@ -24,6 +24,7 @@ export function Unauthenticated(props) {
             <div className="modal-content rounded-4 shadow">
                 <div className="modal-body p-5 pt-0">
                 <form className="get" action="home.html">
+                    <h1>Welcome Watchers</h1>
                     <div className="form-floating mb-3">
                         <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} className="form-control rounded-3" id="floatingInput" placeholder="name@example.com" fdprocessedid="0yatf"/>
                         <label for="floatingInput">User Name</label>
@@ -35,7 +36,7 @@ export function Unauthenticated(props) {
                     <Button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="8v8edk" variant='primary' onClick={() => loginUser()} disabled={!userName || !password}>
                         Sign In
                     </Button>
-                    <Button variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
+                    <Button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
                         Create Account
                     </Button>
                 </form>
