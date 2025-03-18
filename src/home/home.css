@@ -26,8 +26,11 @@ a:hover h1 {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-size: x-large;
     font-weight:bolder;
-    color:black;
+    color: black;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+}
+.border-bottom{
+    font-size:xx-large
 }

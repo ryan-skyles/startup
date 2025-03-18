@@ -46,13 +46,11 @@ function App() {
                             </li>
                         )}
                     </menu>
-                    {authState == AuthState.Authenticated &&(
-                        <div className="col-md-3 text-end">
-                            <NavLink className="nav-link" to="">
-                                <button type="button" className="btn btn-outline-primary me-2">Login</button>
-                            </NavLink>
-                        </div>  
-                    )}
+                    <div className="col-md-3 text-end">
+                        <NavLink className="nav-link" to="">
+                            <button type="button" className="btn btn-outline-primary me-2">Login</button>
+                        </NavLink>
+                    </div>
                 </header>
 
                 <Routes>

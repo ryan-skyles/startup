@@ -4,9 +4,9 @@
     background-size: cover;
     background-position: 50% 0%;
     padding-top: 80px;
-    width: 100%;
+    width: 100%; 
     font-family: 'Alumni Sans Pinstripe', sans-serif;
-    /* min-height: 100vh;*/
+    min-height: 100vh;
     /* margin: 0;
     padding: 0;
     display: flex;
@@ -92,4 +92,13 @@ footer{
     padding: 10px 20px;
     text-align: left;
     font-size: 16px;
+}
+.container {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: x-large;
+    font-weight:bolder;
+    color: black;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 }
