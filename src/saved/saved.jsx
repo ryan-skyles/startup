@@ -21,7 +21,6 @@ export function Saved() {
   return (
     <main className="container">
       <div>
-        <h4 className="fst-italic">Saved Movies</h4>
         <ul className="list-unstyled">
           {savedMovies.length === 0 ? (
             <p>No saved movies yet.</p>
