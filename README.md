@@ -118,8 +118,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I worked the login page so the user had to write a username and password before the sign in button could be activiated. I also made it so the user had to login in in order to have the functionality of going between the home, saved, and account links. After logging in, the user is welcomed and prompted to either go to the home page or logout. The home page contains the users movie inputs in the first container with an example container under to represent where other users rankings will be updated. The bookmark image is there to save the name of the title and functions to display it on the saved page. On the saved page you can click 'watched' and it will be deleted from your list. On the account page, you can simultaneously update your favorite titles with the movie and ranking inputs on your account page but also on the home page. The users name is displayed on the home page and the account page, where the user can upload a profile picture, but currently that picture can only be seen by you, the user. 
+- [x] **Hooks** - I used hooks to store the username in local storage and pass the username to different pages on the website, specifically the home, account, and post-login page.
 
 ## 🚀 Service deliverable
 
