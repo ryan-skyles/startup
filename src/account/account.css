@@ -7,11 +7,11 @@ color: rgb(223, 186, 0)
 .nav-link:hover {
     color: rgb(139, 116, 0);
 }
-.btn-outline-primary {
+.btn-outline {
     color: rgb(223, 186, 0);
     border-color: rgb(223, 186, 0);
 }
-.btn-outline-primary:hover {
+.btn-outline:hover {
     background-color:rgb(255, 213, 0);
     border-color:rgb(223, 186, 0);
     color: black;
@@ -30,7 +30,7 @@ a:hover h1 {
     margin: 0 auto;
     padding: 20px;
 }
-.btn-primary{
+.btn{
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     --bs-btn-font-size: medium;
     --bs-btn-font-weight: 700;

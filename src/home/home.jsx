@@ -27,45 +27,72 @@ export function Home({ movies, updateMovie }) {
   };
 
   return (
-    <main className="container">
-      <div className="my-3 p-3 bg-body rounded">
-        {/* Display the username */}
-        <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
-        
-        {movies.map((movie) => (
-          <div key={movie.id} className="d-flex text-body-secondary pt-3">
-            <img
-              src={movie.image}
-              alt={`Rank ${movie.rank}`}
-              className="bd-placeholder-img flex-shrink-0 me-2 rounded"
-              width="50"
-              height="50"
-            />
-            <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-              <div className="d-flex justify-content-between">
-                <strong className="text-gray-dark">{movie.title}</strong>
+    <main>
+      <div className="container">
+        <div className="my-3 p-3 bg-body rounded">
+          {/* Display the username */}
+          <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
+          
+          {movies.map((movie) => (
+            <div key={movie.id} className="d-flex text-body-secondary pt-3">
+              <img
+                src={movie.image}
+                alt={`Rank ${movie.rank}`}
+                className="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                width="50"
+                height="50"
+              />
+              <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div className="d-flex justify-content-between">
+                  <strong className="text-gray-dark">{movie.title}</strong>
+                </div>
+                <span className="d-block">Rating: {movie.rating}</span>
               </div>
-              <span className="d-block">Rating: {movie.rating}</span>
+              <button
+                className="btn btn-light rounded-pill px-3"
+                type="button"
+                onClick={() => saveMovie(movie)}
+              >
+                <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
+              </button>
             </div>
-            <button
-              className="btn btn-light rounded-pill px-3"
-              type="button"
-              onClick={() => saveMovie(movie)}
-            >
-              <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Navigation to saved movies */}
-      <button
-        className="btn btn-secondary mt-3"
-        onClick={handleNavigateToSaved}
-      >
-        Go to Saved Movies
-      </button>
+      {/* Place holder for other users rankings */}
+      <div className="container">
+        <div className="my-3 p-3 bg-body rounded">
+          {/* Display the username */}
+          <h3 className="border-bottom pb-2 mb-0">Example's Movies</h3>
+          {movies.map((movie) => (
+            <div key={movie.id} className="d-flex text-body-secondary pt-3">
+              <img
+                src={movie.image}
+                alt={`Rank ${movie.rank}`}
+                className="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                width="50"
+                height="50"
+              />
+              <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div className="d-flex justify-content-between">
+                  <strong className="text-gray-dark">Movie title</strong>
+                </div>
+                <span className="d-block">Rating: 9/10</span>
+              </div>
+              <button
+                className="btn btn-light rounded-pill px-3"
+                type="button"
+                onClick={() => saveMovie(movie)}
+              >
+                <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </main>
+    
   );
 }
 

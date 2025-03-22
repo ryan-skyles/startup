@@ -22,7 +22,7 @@ function App() {
 
   // Handle updating movie data
   const updateMovie = (updatedMovies) => {
-    setMovies(updatedMovies); // Update movies state
+    setMovies(updatedMovies); 
   };
 
   return (
