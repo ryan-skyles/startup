@@ -1,38 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './home.css';
+import React, { useState, useEffect } from "react";
+import "./home.css";
 
 export function Home({ movies, updateMovie }) {
   const [savedMovies, setSavedMovies] = useState([]);
-  const navigate = useNavigate();
-  const userName = localStorage.getItem('userName') || 'Guest';
+  const [quote, setQuote] = useState("Loading...");
+  const [quoteRole, setQuoteRole] = useState("unknown");
+  const [quoteShow, setQuoteShow] = useState("unknown");
+  const userName = localStorage.getItem("userName") || "Guest";
 
   // Load saved movies from localStorage
   useEffect(() => {
-    const savedMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies')) || [];
+    const savedMoviesFromStorage =
+      JSON.parse(localStorage.getItem("savedMovies")) || [];
     setSavedMovies(savedMoviesFromStorage);
+  }, []);
+
+  // Fetch a random movie quote once when the component mounts
+  useEffect(() => {
+    fetch("https://movie-quote-api.herokuapp.com/v1/quote/")
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.quote);
+        setQuoteRole(data.role);
+        setQuoteShow(data.show);
+      })
+      .catch((error) => console.error("Error fetching quote:", error));
   }, []);
 
   // Handle save movie button click
   const saveMovie = (movie) => {
     setSavedMovies((prevMovies) => {
+      if (prevMovies.some((saved) => saved.id === movie.id)) {
+        return prevMovies; // Prevent duplicates
+      }
       const updatedMovies = [...prevMovies, movie];
-      localStorage.setItem('savedMovies', JSON.stringify(updatedMovies));
+      localStorage.setItem("savedMovies", JSON.stringify(updatedMovies));
       return updatedMovies;
     });
   };
 
-  const handleNavigateToSaved = () => {
-    navigate('/saved');
-  };
-
   return (
     <main>
+      <div className="container text-center">
+        <div className="my-3 p-3 bg-body rounded">
+          <h2>Random Movie Quote</h2>
+          <div className="quote-box bg-light text-dark">
+            <p className="quote">"{quote}"</p>
+            <p className="author">- {quoteRole} ({quoteShow})</p>
+          </div>
+        </div>
+      </div>
+
+      {/* User's Movies Section */}
       <div className="container">
         <div className="my-3 p-3 bg-body rounded">
-          {/* Display the username */}
           <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
-          
+
           {movies.map((movie) => (
             <div key={movie.id} className="d-flex text-body-secondary pt-3">
               <img
@@ -53,18 +76,23 @@ export function Home({ movies, updateMovie }) {
                 type="button"
                 onClick={() => saveMovie(movie)}
               >
-                <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
+                <img
+                  src="SaveButton.png"
+                  width="70px"
+                  height="40px"
+                  alt="Save Button"
+                />
               </button>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Place holder for other users rankings */}
+      {/* Placeholder for Example Movies */}
       <div className="container">
         <div className="my-3 p-3 bg-body rounded">
-          {/* Display the username */}
           <h3 className="border-bottom pb-2 mb-0">Example's Movies</h3>
+
           {movies.map((movie) => (
             <div key={movie.id} className="d-flex text-body-secondary pt-3">
               <img
@@ -85,18 +113,126 @@ export function Home({ movies, updateMovie }) {
                 type="button"
                 onClick={() => saveMovie(movie)}
               >
-                <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
+                <img
+                  src="SaveButton.png"
+                  width="70px"
+                  height="40px"
+                  alt="Save Button"
+                />
               </button>
             </div>
           ))}
         </div>
       </div>
     </main>
-    
   );
 }
 
 
+
+
+
+// import React, { useState, useEffect } from 'react';
+// // import { useNavigate } from 'react-router-dom';
+// import './home.css';
+
+// export function Home({ movies, updateMovie }) {
+//   const [savedMovies, setSavedMovies] = useState([]);
+//   // const navigate = useNavigate();
+//   const userName = localStorage.getItem('userName') || 'Guest';
+
+//   // Load saved movies from localStorage
+//   useEffect(() => {
+//     const savedMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies')) || [];
+//     setSavedMovies(savedMoviesFromStorage);
+//   }, []);
+
+//   // Handle save movie button click
+//   const saveMovie = (movie) => {
+//     setSavedMovies((prevMovies) => {
+//       const updatedMovies = [...prevMovies, movie];
+//       localStorage.setItem('savedMovies', JSON.stringify(updatedMovies));
+//       return updatedMovies;
+//     });
+//   };
+
+//   // const handleNavigateToSaved = () => {
+//   //   navigate('/saved');
+//   // };
+
+//   return (
+//     <main>
+//       <div>
+//         <h2>Movie Quote</h2>
+//         {loading ? <p>Loading...</p> : <p>"{quote.quote}" - {quote.role} ({quote.show})</p>}
+//       </div>
+//       <div className="container">
+//         <div className="my-3 p-3 bg-body rounded">
+//           {/* Display the username */}
+//           <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
+          
+//           {movies.map((movie) => (
+//             <div key={movie.id} className="d-flex text-body-secondary pt-3">
+//               <img
+//                 src={movie.image}
+//                 alt={`Rank ${movie.rank}`}
+//                 className="bd-placeholder-img flex-shrink-0 me-2 rounded"
+//                 width="50"
+//                 height="50"
+//               />
+//               <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+//                 <div className="d-flex justify-content-between">
+//                   <strong className="text-gray-dark">{movie.title}</strong>
+//                 </div>
+//                 <span className="d-block">Rating: {movie.rating}</span>
+//               </div>
+//               <button
+//                 className="btn btn-light rounded-pill px-3"
+//                 type="button"
+//                 onClick={() => saveMovie(movie)}
+//               >
+//                 <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
+//               </button>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* Place holder for other users rankings */}
+//       <div className="container">
+//         <div className="my-3 p-3 bg-body rounded">
+//           {/* Display the username */}
+//           <h3 className="border-bottom pb-2 mb-0">Example's Movies</h3>
+//           {movies.map((movie) => (
+//             <div key={movie.id} className="d-flex text-body-secondary pt-3">
+//               <img
+//                 src={movie.image}
+//                 alt={`Rank ${movie.rank}`}
+//                 className="bd-placeholder-img flex-shrink-0 me-2 rounded"
+//                 width="50"
+//                 height="50"
+//               />
+//               <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+//                 <div className="d-flex justify-content-between">
+//                   <strong className="text-gray-dark">Movie title</strong>
+//                 </div>
+//                 <span className="d-block">Rating: 9/10</span>
+//               </div>
+//               <button
+//                 className="btn btn-light rounded-pill px-3"
+//                 type="button"
+//                 onClick={() => saveMovie(movie)}
+//               >
+//                 <img src="SaveButton.png" width="70px" height="40px" alt="Save Button" />
+//               </button>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </main>
+    
+//   );
+// }
 
 
 
