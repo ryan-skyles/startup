@@ -5,7 +5,10 @@ export function Account({ movies, updateMovie }) {
   const [profileImage, setProfileImage] = useState(null); 
   const [userName, setUserName] = useState(""); 
   const [updatedMovies, setUpdatedMovies] = useState([...movies]); 
-
+  const [watchedCount, setWatchedCount] = useState(() => {
+    return parseInt(localStorage.getItem('watchedCount')) || 0;
+  });
+  
   React.useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
     if (storedUserName) {
@@ -33,8 +36,21 @@ export function Account({ movies, updateMovie }) {
     const updatedMoviesCopy = [...updatedMovies];
     updatedMoviesCopy[index] = updatedMovies[index];
     updateMovie(updatedMoviesCopy); 
+
+    setWatchedCount((prev) => {
+      const newCount = prev + 1;
+      localStorage.setItem('watchedCount', newCount);
+      return newCount;
+    });
+    
   };
 
+  // const hasMovieChanged = (index) => {
+  //   const original = movies[index];
+  //   const updated = updatedMovies[index];
+  //   return original.title !== updated.title || original.rating !== updated.rating;
+  // };
+  
   return (
     <main className="container">
       <div className="col-lg-4">
@@ -68,7 +84,6 @@ export function Account({ movies, updateMovie }) {
       {/* Movie Rankings */}
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h4 className="border-bottom pb-2 mb-0">{userName} | Your Current Rankings:</h4>
-
         {movies.map((movie) => (
           <div key={movie.id} className="d-flex text-body-secondary pt-3">
             <img
@@ -86,6 +101,11 @@ export function Account({ movies, updateMovie }) {
             </div>
           </div>
         ))}
+      </div>
+      <div className="my-3 p-3 bg-body rounded shadow-sm">
+      <h4 className="border-bottom pb-2 mb-0">
+          🎬Movies Watched: {watchedCount}
+        </h4>
       </div>
 
       {/* Update Rankings */}
@@ -135,8 +155,9 @@ export function Account({ movies, updateMovie }) {
               className="btn btn-warning rounded-pill px-5"
               type="button"
               onClick={() => handleUpdate(index)}
+              // disabled={!hasMovieChanged(index)}
             >
-              Update
+              Add
             </button>
           </div>
         ))}

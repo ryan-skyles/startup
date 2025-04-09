@@ -4,8 +4,9 @@ import "./home.css";
 export function Home({ movies, updateMovie }) {
   const [savedMovies, setSavedMovies] = useState([]);
   const [quote, setQuote] = useState("Loading...");
-  const [quoteRole, setQuoteRole] = useState("unknown");
-  const [quoteShow, setQuoteShow] = useState("unknown");
+  const [quoteMovie, setQuoteMovie] = useState("unknown");
+  const [quoteYear, setQuoteYear] = useState("unknown");
+
   const userName = localStorage.getItem("userName") || "Guest";
 
   // Load saved movies from localStorage
@@ -15,23 +16,30 @@ export function Home({ movies, updateMovie }) {
     setSavedMovies(savedMoviesFromStorage);
   }, []);
 
-  // Fetch a random movie quote once when the component mounts
-  useEffect(() => {
-    fetch("https://movie-quote-api.herokuapp.com/v1/quote/")
+  // Fetch Quote
+  const fetchWowQuote = () => {
+    fetch("https://owen-wilson-wow-api.onrender.com/wows/random")
       .then((response) => response.json())
       .then((data) => {
-        setQuote(data.quote);
-        setQuoteRole(data.role);
-        setQuoteShow(data.show);
+        const wow = data[0];
+        setQuote(wow.full_line);
+        setQuoteMovie(wow.movie);
+        setQuoteYear(wow.year);
       })
-      .catch((error) => console.error("Error fetching quote:", error));
+      .catch((error) => console.error("Error fetching wow quote:", error));
+  };
+  
+  useEffect(() => {
+    fetchWowQuote();
   }, []);
+  
+
 
   // Handle save movie button click
   const saveMovie = (movie) => {
     setSavedMovies((prevMovies) => {
       if (prevMovies.some((saved) => saved.id === movie.id)) {
-        return prevMovies; // Prevent duplicates
+        return prevMovies; 
       }
       const updatedMovies = [...prevMovies, movie];
       localStorage.setItem("savedMovies", JSON.stringify(updatedMovies));
@@ -43,10 +51,16 @@ export function Home({ movies, updateMovie }) {
     <main>
       <div className="container text-center">
         <div className="my-3 p-3 bg-body rounded">
-          <h2>Random Movie Quote</h2>
           <div className="quote-box bg-light text-dark">
             <p className="quote">"{quote}"</p>
-            <p className="author">- {quoteRole} ({quoteShow})</p>
+            <p className="author">
+              — Owen Wilson in <strong>{quoteMovie}</strong> ({quoteYear})
+            </p>
+            <div>
+              <button className="btn btn-primary my-3" onClick={fetchWowQuote}>
+                Get New Wow
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +142,7 @@ export function Home({ movies, updateMovie }) {
   );
 }
 
-
+    
 // import React, { useState, useEffect } from 'react';
 // // import { useNavigate } from 'react-router-dom';
 // import './home.css';

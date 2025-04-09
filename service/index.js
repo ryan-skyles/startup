@@ -7,6 +7,7 @@ const app = express();
 const authCookieName = 'token';
 
 let users = [];
+// let numWatched = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -52,14 +53,25 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     res.status(204).end();
 });
 
-// const verifyAuth = async (req, res, next) => {
-//     const user = await findUser('token', req.cookies[authCookieName]);
-//     if (user) {
-//         next();
-//     } else {
-//         res.status(401).send({ msg: 'Unauthorized' });
-//     }
-// };
+const verifyAuth = async (req, res, next) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+        next();
+    } else {
+        res.status(401).send({ msg: 'Unauthorized' });
+    }
+};
+
+// apiRouter.get('/numWatched', verifyAuth, (_req, res) => {
+//   res.send(scores);
+// });
+
+
+// apiRouter.post('/numWatched', verifyAuth, (req, res) => {
+//   scores = updateScores(req.body);
+//   res.send(scores);
+// });
+
 
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
