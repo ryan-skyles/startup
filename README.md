@@ -125,11 +125,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Done
+- [x] **Static middleware for frontend** - Done
+- [x] **Calls to third party endpoints** - The home page displays quotes from a certian actor and has the ability to get a new quote with a button
+- [x] **Backend service endpoints** - Endpoints made for movies watched scorebaord
+- [x] **Frontend calls service endpoints** - 'Add' button on account page will increment movies watched by 1 which will then update the movies watched total and display it if the rank is high enough
 
 ## 🚀 DB/Login deliverable
 
