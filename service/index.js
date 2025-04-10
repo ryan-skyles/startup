@@ -7,7 +7,7 @@ const app = express();
 const authCookieName = 'token';
 
 let users = [];
-// let numWatched = [];
+let totals = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -62,15 +62,15 @@ const verifyAuth = async (req, res, next) => {
     }
 };
 
-// apiRouter.get('/numWatched', verifyAuth, (_req, res) => {
-//   res.send(scores);
-// });
 
+apiRouter.get('/totals', verifyAuth, (_req, res) => {
+  res.send(totals);
+});
 
-// apiRouter.post('/numWatched', verifyAuth, (req, res) => {
-//   scores = updateScores(req.body);
-//   res.send(scores);
-// });
+apiRouter.post('/total', verifyAuth, (req, res) => {
+  totals = updateTotals(req.body);
+  res.send(totals);
+});
 
 
 app.use(function (err, req, res, next) {
@@ -80,6 +80,21 @@ app.use(function (err, req, res, next) {
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
+
+
+function updateTotals(newTotal) {
+  const existingIndex = totals.findIndex((t) => t.name === newTotal.name);
+
+  if (existingIndex >= 0) {
+    totals[existingIndex] = newTotal; 
+  } else {
+    totals.push(newTotal); 
+  }
+
+  totals.sort((a, b) => b.total - a.total);
+
+  return totals.slice(0, 10);
+}
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);

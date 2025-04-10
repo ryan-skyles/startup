@@ -31,7 +31,6 @@ export function Account({ movies, updateMovie }) {
     setUpdatedMovies(updatedMoviesCopy); 
   };
 
-  // Commit changes to the main movies array when "Update" button is clicked
   const handleUpdate = (index) => {
     const updatedMoviesCopy = [...updatedMovies];
     updatedMoviesCopy[index] = updatedMovies[index];
@@ -40,10 +39,29 @@ export function Account({ movies, updateMovie }) {
     setWatchedCount((prev) => {
       const newCount = prev + 1;
       localStorage.setItem('watchedCount', newCount);
+      
+      const user = userName || 'Guest';
+      const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
+      stats[user] = newCount;
+      localStorage.setItem('watchedStats', JSON.stringify(stats));
+
       return newCount;
     });
     
   };
+
+  const [topUsers, setTopUsers] = useState([]);
+
+
+  useEffect(() => {
+    const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
+    const sorted = Object.entries(stats)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5); 
+    setTopUsers(sorted);
+  }, [watchedCount]); 
+
+  
 
   // const hasMovieChanged = (index) => {
   //   const original = movies[index];
@@ -102,8 +120,24 @@ export function Account({ movies, updateMovie }) {
           </div>
         ))}
       </div>
+
       <div className="my-3 p-3 bg-body rounded shadow-sm">
-      <h4 className="border-bottom pb-2 mb-0">
+        <h4 className="border-bottom pb-2 mb-0">🏆 Top 5 Users</h4>
+        {topUsers.length === 0 ? (
+          <p className="text-muted">No data yet</p>
+        ) : (
+          <ol className="pt-2">
+            {topUsers.map(([name, count], i) => (
+              <li key={i}>
+                <strong>{name}</strong>: {count} watched
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+
+      <div className="my-3 p-3 bg-body rounded shadow-sm">
+        <h4 className="border-bottom pb-2 mb-0">
           🎬Movies Watched: {watchedCount}
         </h4>
       </div>
