@@ -38,7 +38,7 @@ export function Unauthenticated(props) {
       <main className="form-signin w-100 m-auto">
           <div className="modal-content rounded-4 shadow">
               <div className="modal-body p-5 pt-0">
-              <form className="get" action="home.html">
+              <form className="get" onSubmit={(e) => { e.preventDefault(); loginUser(); }}>
                   <div className="userName text-center" style={{ fontSize: `${Math.max(50, 100 / props.userName.length)}px` }}>
                     Welcome Watchers
                   </div>
@@ -50,7 +50,7 @@ export function Unauthenticated(props) {
                       <input type="password" onChange={(e) => setPassword(e.target.value)}className="form-control rounded-3" id="floatingPassword" placeholder="Password" fdprocessedid="vllqp"/>
                       <label for="floatingPassword">Password</label>
                   </div>
-                  <Button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="8v8edk" variant='warning' onClick={() => loginUser()} disabled={!userName || !password}>
+                  <Button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" fdprocessedid="8v8edk" variant='warning' onClick={() => loginUser()} disabled={!userName || !password}>
                       Sign In
                   </Button>
                   <Button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
