@@ -33,6 +33,27 @@ const totalsCollection = db.collection('totals');
 //   }
 // } 
 // main()
+async function updateUserTotal(email, newTotal) {
+  await userCollection.updateOne(
+    { email },
+    {
+      $set: {
+        total: newTotal,
+        date: new Date().toLocaleString(),
+      },
+    }
+  );
+}
+
+async function getHighTotals() {
+  const options = {
+    sort: { total: -1 },
+    limit: 5,
+  };
+  const cursor = userCollection.find({ total: { $exists: true } }, options);
+  return cursor.toArray();
+}
+
 
 function getUser(email) {
   return userCollection.findOne({ email: email });
@@ -50,18 +71,8 @@ async function updateUser(user) {
   await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 
-async function addTotal(total) {
-  return totalsCollection.insertOne(total);
-}
-
-function getHighTotals() {
-  const query = { total: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { total: -1 },
-    limit: 5,
-  };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
+async function addTotal(totals) {
+  return totalsCollection.insertOne(totals);
 }
 
 module.exports = {
@@ -70,6 +81,8 @@ module.exports = {
   addUser,
   updateUser,
   addTotal,
+  updateUserTotal,
   getHighTotals,
 };
+
 
