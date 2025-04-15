@@ -95,7 +95,6 @@ apiRouter.post('/total', verifyAuth, async (req, res) => {
 });
 
 
-
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
 });

@@ -79,7 +79,6 @@ async function addTotal({ email, total }) {
   });
 }
  
-
 function getHighTotals() {
   const query = { total: { $gt: 0, $lt: 900 } };
   const options = {
