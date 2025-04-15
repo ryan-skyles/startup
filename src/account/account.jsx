@@ -50,10 +50,38 @@ export function Account({ movies, updateMovie }) {
     
   };
 
-  const [topUsers, setTopUsers] = useState([]);
+  const [topUsers, setTopUsers] = React.useState([]);
+
+  // React.useEffect(() => {
+  //     fetch('/api/totals')
+  //       .then((response) => response.json())
+  //       .then((topUsers) => {
+  //         setTotals(topUsers);
+  //       });
+  // }, []);
+
+  // const totalRows = [];
+  // if (totals.length) {
+  //   for (const [i, total] of totals.entries()) {
+  //     totalRows.push(
+  //       <tr key={i}>
+  //         <td>{i}</td>
+  //         <td>{total.name.split('@')[0]}</td>
+  //         <td>{total.total}</td>
+  //         <td>{total.date}</td>
+  //       </tr>
+  //     );
+  //   }
+  // } else {
+  //   totalRows.push(
+  //     <tr key='0'>
+  //       <td colSpan='4'>Be the first to total</td>
+  //     </tr>
+  //   );
+  // }
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
     const sorted = Object.entries(stats)
       .sort(([, a], [, b]) => b - a)
@@ -138,7 +166,7 @@ export function Account({ movies, updateMovie }) {
 
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h4 className="border-bottom pb-2 mb-0">
-          🎬Movies Watched: {watchedCount}
+          🎬Movies Watched: {totalRows}
         </h4>
       </div>
 

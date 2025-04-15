@@ -126,7 +126,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Node.js/Express HTTP service** - Done
-- [x] **Static middleware for frontend** - Done, but pressing login brings up a 404 error I don't know how to fix. The Login app and api use is the same as simon but does not work for a returning user or when they press login, it works if you create an account though
+- [x] **Static middleware for frontend** - Done
 - [x] **Calls to third party endpoints** - The home page displays quotes from a certian actor and has the ability to get a new quote with a button
 - [x] **Backend service endpoints** - Endpoints made for movies watched scorebaord
 - [x] **Frontend calls service endpoints** - 'Add' button on account page will increment movies watched by 1 which will then update the movies watched total and display it if the rank is high enough
