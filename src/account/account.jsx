@@ -8,13 +8,29 @@ export function Account({ movies, updateMovie }) {
   const [watchedCount, setWatchedCount] = useState(() => {
     return parseInt(localStorage.getItem('watchedCount')) || 0;
   });
-  
-  React.useEffect(() => {
+
+  const [topUsers, setTopUsers] = useState([]);
+
+  useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
     if (storedUserName) {
       setUserName(storedUserName);
     }
+
+    fetch('/api/totals')
+      .then((response) => response.json())
+      .then((totals) => {
+        const top = totals.slice(0, 5).map((entry) => [entry.name.split('@')[0], entry.total]);
+        setTopUsers(top);
+      });
   }, []);
+  
+  // React.useEffect(() => {
+  //   const storedUserName = localStorage.getItem('userName');
+  //   if (storedUserName) {
+  //     setUserName(storedUserName);
+  //   }
+  // }, []);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -38,74 +54,54 @@ export function Account({ movies, updateMovie }) {
 
     setWatchedCount((prev) => {
       const newCount = prev + 1;
-      localStorage.setItem('watchedCount', newCount);
+      localStorage.setItem('watchedCount', newCount);     
       
       const user = userName || 'Guest';
       const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
       stats[user] = newCount;
       localStorage.setItem('watchedStats', JSON.stringify(stats));
 
+      // fetch('/api/total', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ total: newCount }),
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     setTopUsers(data.map(user => [user.email.split('@')[0], user.total]));
+      //   })
+      //   .catch((err) => console.error('Failed to update total:', err));
+
+      // return newCount;
+      fetch('/api/total', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: user,
+          total: newCount,
+          date: new Date().toLocaleDateString(),
+        }),
+      });
+
       return newCount;
     });
     
   };
 
-  const [topUsers, setTopUsers] = useState([]);
+  // const [topUsers, setTopUsers] = useState([]);
  
  
-  useEffect(() => {
-    const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
-    const sorted = Object.entries(stats)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5); 
-    setTopUsers(sorted);
-  }, [watchedCount]); 
-
-
-
-  // const [topUsers, setTopUsers] = React.useState([]);
-  
-  // React.useEffect(() => {
-  //     fetch('/api/totals')
-  //       .then((response) => response.json())
-  //       .then((topUsers) => {
-  //         setTotals(topUsers);
-  //       });
-  // }, []);
-
-  // const totalRows = [];
-  // if (totals.length) {
-  //   for (const [i, total] of totals.entries()) {
-  //     totalRows.push(
-  //       <tr key={i}>
-  //         <td>{i}</td>
-  //         <td>{total.name.split('@')[0]}</td>
-  //         <td>{total.total}</td>
-  //         <td>{total.date}</td>
-  //       </tr>
-  //     );
-  //   }
-  // } else {
-  //   totalRows.push(
-  //     <tr key='0'>
-  //       <td colSpan='4'>Be the first to total</td>
-  //     </tr>
-  //   );
-  // }
   // useEffect(() => {
-  //   const storedUserName = localStorage.getItem('userName');
-  //   if (storedUserName) {
-  //   const updatedMoviesCopy = [...updatedMovies];
-  //   updatedMoviesCopy[index] = updatedMovies[index];
-  //   updateMovie(updatedMoviesCopy); 
+  //   const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
+  //   const sorted = Object.entries(stats)
+  //     .sort(([, a], [, b]) => b - a)
+  //     .slice(0, 5); 
+  //   setTopUsers(sorted);
+  // }, [watchedCount]); 
 
-  //   setWatchedCount((prev) => {
-  //     const newCount = prev + 1;
-  //     localStorage.setItem('watchedCount', newCount);
-  //     return newCount;
-  //   });
-  //   };
-  // });
+
   // React.useEffect(() => {
   //   const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
   //   const sorted = Object.entries(stats)

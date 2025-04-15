@@ -34,7 +34,7 @@ const totalsCollection = db.collection('totals');
 // } 
 // main()
 async function updateUserTotal(email, newTotal) {
-  await userCollection.updateOne(
+  await totalsCollection.updateOne(
     { email },
     {
       $set: {
@@ -50,7 +50,7 @@ async function getHighTotals() {
     sort: { total: -1 },
     limit: 5,
   };
-  const cursor = userCollection.find({ total: { $exists: true } }, options);
+  const cursor = totalsCollection.find({ total: { $exists: true } }, options);
   return cursor.toArray();
 }
 
