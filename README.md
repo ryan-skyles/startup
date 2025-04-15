@@ -135,11 +135,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **User registration** - I did not complete this part of the deliverable.
-- [ ] **User login and logout** - I did not complete this part of the deliverable.
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
+- [x] **User registration** - When user creates an account, their username and password is stored in the database
+- [x] **User login and logout** - Functional
+- [x] **Stores data in MongoDB** -  Totals stored in MongoDB from 'service/database.js'. When you press the add button on the account page in update rankings, the total increases and the total number is stored in it's own collection
+- [x] **Stores credentials in MongoDB** - auth stored in MongoDB from 'service/database.js'.
+- [x] **Restricts functionality based on authentication** - If the user already exists, an error will pop up and prompt them to try something different. The password is hidden on the database 
+
+
 
 ## 🚀 WebSocket deliverable
 
