@@ -34,7 +34,7 @@ const totalsCollection = db.collection('totals');
 // } 
 // main()
 async function updateUserTotal(email, newTotal) {
-  await totalsCollection.updateOne(
+  await userCollection.updateOne(
     { email },
     {
       $set: {
@@ -50,7 +50,7 @@ async function getHighTotals() {
     sort: { total: -1 },
     limit: 5,
   };
-  const cursor = totalsCollection.find({ total: { $exists: true } }, options);
+  const cursor = userCollection.find({ total: { $exists: true } }, options);
   return cursor.toArray();
 }
 
@@ -71,8 +71,23 @@ async function updateUser(user) {
   await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 
-async function addTotal(totals) {
-  return totalsCollection.insertOne(totals);
+async function addTotal({ email, total }) {
+  return totalsCollection.insertOne({
+    email,
+    total,
+    date: new Date().toLocaleString(),
+  });
+}
+ 
+
+function getHighTotals() {
+  const query = { total: { $gt: 0, $lt: 900 } };
+  const options = {
+    sort: { total: -1 },
+    limit: 5,
+  };
+  const cursor = totalsCollection.find(query, options);
+  return cursor.toArray();
 }
 
 module.exports = {

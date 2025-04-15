@@ -70,21 +70,27 @@ apiRouter.get('/totals', verifyAuth, async (_req, res) => {
   res.send(totals);
 });
 
-// apiRouter.post('/total', verifyAuth, async (req, res) => {
-//   const totals = updateTotals(req.body);
-//   res.send(totals);
-// }); 
-
 apiRouter.post('/total', verifyAuth, async (req, res) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
-  const { total } = req.body;
+  const token = req.cookies[authCookieName];
+  const user = await findUser('token', token);
 
-  if (user && typeof total === 'number') {
-    await DB.updateUserTotal(user.email, total);
-    const updatedTotals = await DB.getHighTotals();
-    res.send(updatedTotals);
-  } else {
-    res.status(400).send({ msg: 'Invalid request' });
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+
+  const newTotal = req.body.total;
+
+  try {
+    // Update 'user' collection
+    await DB.updateUserTotal(user.email, newTotal);
+
+    // Add entry to 'totals' collection
+    await DB.addTotal({ email: user.email, total: newTotal });
+
+    res.send({ msg: 'Total updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ msg: 'Failed to update total' });
   }
 });
 
