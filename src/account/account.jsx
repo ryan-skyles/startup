@@ -50,8 +50,21 @@ export function Account({ movies, updateMovie }) {
     
   };
 
-  const [topUsers, setTopUsers] = React.useState([]);
+  const [topUsers, setTopUsers] = useState([]);
+ 
+ 
+  useEffect(() => {
+    const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
+    const sorted = Object.entries(stats)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5); 
+    setTopUsers(sorted);
+  }, [watchedCount]); 
 
+
+
+  // const [topUsers, setTopUsers] = React.useState([]);
+  
   // React.useEffect(() => {
   //     fetch('/api/totals')
   //       .then((response) => response.json())
@@ -79,15 +92,27 @@ export function Account({ movies, updateMovie }) {
   //     </tr>
   //   );
   // }
+  // useEffect(() => {
+  //   const storedUserName = localStorage.getItem('userName');
+  //   if (storedUserName) {
+  //   const updatedMoviesCopy = [...updatedMovies];
+  //   updatedMoviesCopy[index] = updatedMovies[index];
+  //   updateMovie(updatedMoviesCopy); 
 
-
-  React.useEffect(() => {
-    const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
-    const sorted = Object.entries(stats)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5); 
-    setTopUsers(sorted);
-  }, [watchedCount]); 
+  //   setWatchedCount((prev) => {
+  //     const newCount = prev + 1;
+  //     localStorage.setItem('watchedCount', newCount);
+  //     return newCount;
+  //   });
+  //   };
+  // });
+  // React.useEffect(() => {
+  //   const stats = JSON.parse(localStorage.getItem('watchedStats')) || {};
+  //   const sorted = Object.entries(stats)
+  //     .sort(([, a], [, b]) => b - a)
+  //     .slice(0, 5); 
+  //   setTopUsers(sorted);
+  // }, [watchedCount]); 
 
   
 
@@ -166,7 +191,7 @@ export function Account({ movies, updateMovie }) {
 
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h4 className="border-bottom pb-2 mb-0">
-          🎬Movies Watched: {totalRows}
+          🎬Movies Watched: {watchedCount}
         </h4>
       </div>
 

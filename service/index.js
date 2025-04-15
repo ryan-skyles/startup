@@ -18,8 +18,10 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-const apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+// const apiRouter = express.Router();
+// app.use(`/api`, apiRouter);
+var apiRouter = express.Router();
+ app.use(`/api`, apiRouter);
 
 apiRouter.post('/auth/create', async (req, res) => {
     if (await findUser('email', req.body.email)) {
@@ -72,7 +74,7 @@ apiRouter.get('/totals', verifyAuth, (_req, res) => {
 
 apiRouter.post('/total', verifyAuth, (req, res) => {
   // const totals = updateTotals(req.body);
-  scores = updateTotals(req.body);
+  totals = updateTotals(req.body);
   res.send(totals);
 });
 
@@ -115,7 +117,7 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
-  await DB.addUser(user);
+  // await DB.addUser(user);
 
   return user;
 }
@@ -123,10 +125,11 @@ async function createUser(email, password) {
 async function findUser(field, value) {
   if (!value) return null;
 
-  if (field === 'token') {
-    return DB.getUserByToken(value);
-  }
-  return DB.getUser(value);
+  // if (field === 'token') {
+  //   return DB.getUserByToken(value);
+  // }
+  // return DB.getUser(value);
+  return users.find((u) => u[field] === value);
 }
 
 function setAuthCookie(res, authToken) {
@@ -136,10 +139,14 @@ function setAuthCookie(res, authToken) {
       sameSite: 'strict',
     });
 }
-  
-const httpService = app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
+  
+// const httpService = app.listen(port, () => {
+//     console.log(`Listening on port ${port}`);
+// });
 
 // const cookieParser = require('cookie-parser');
 // const bcrypt = require('bcryptjs');
@@ -280,6 +287,12 @@ const httpService = app.listen(port, () => {
 // const httpService = app.listen(port, () => {
 //     console.log(`Listening on port ${port}`);
 // });
+
+
+
+
+
+
 
 
 // const cookieParser = require('cookie-parser');
