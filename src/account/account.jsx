@@ -7,6 +7,41 @@ export function Account({ movies, updateMovie }) {
   const [updatedMovies, setUpdatedMovies] = useState([...movies]);
   const [watchedCount, setWatchedCount] = useState(0);
   const [topUsers, setTopUsers] = useState([]);
+  // // for movie reviews
+  // const [reviewTitle, setReviewTitle] = useState('');
+  // const [reviewRating, setReviewRating] = useState('');
+  // const [reviewText, setReviewText] = useState('');
+  // //to display movie reviews
+  // const [reviewInput, setReviewInput] = useState({
+  //   title: '',
+  //   rating: '',
+  //   review: '',
+  // });
+
+
+
+  // const handleSubmitReview = () => {
+  //   if (!reviewTitle || !reviewRating || !reviewText) {
+  //     alert('Please fill in all fields');
+  //     return;
+  //   }
+
+  //   const newReview = {
+  //     id: Date.now(), // or use uuid
+  //     title: reviewTitle,
+  //     rating: reviewRating,
+  //     review: reviewText,
+  //     image: '', // you could later add upload/image search here
+  //   };
+
+  //   const updatedList = [...updatedMovies, newReview];
+  //   updateMovie(updatedList);
+
+  //   // Clear form
+  //   setReviewTitle('');
+  //   setReviewRating('');
+  //   setReviewText('');
+  // };
 
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
@@ -92,6 +127,13 @@ export function Account({ movies, updateMovie }) {
         </label>
       </div>
 
+        {/* Watched Count */}
+      <div className="my-3 p-3 bg-body rounded shadow-sm">
+        <h4 className="border-bottom pb-2 mb-0">
+          🎬 Movies Watched: {watchedCount}
+        </h4>
+      </div>
+
       {/* User Rankings */}
       <div className="my-3 p-3 bg-body rounded shadow-sm">
         <h4 className="border-bottom pb-2 mb-0">{userName} | Your Current Rankings:</h4>
@@ -128,13 +170,6 @@ export function Account({ movies, updateMovie }) {
             ))}
           </ol>
         )}
-      </div>
-
-      {/* Watched Count */}
-      <div className="my-3 p-3 bg-body rounded shadow-sm">
-        <h4 className="border-bottom pb-2 mb-0">
-          🎬 Movies Watched: {watchedCount}
-        </h4>
       </div>
 
       {/* Update Rankings */}
@@ -185,9 +220,58 @@ export function Account({ movies, updateMovie }) {
           </div>
         ))}
       </div>
+      {/* Movie Review Submission Section
+      <div className="my-3 p-3 bg-body rounded shadow-sm">
+        <h4 className="border-bottom pb-2 mb-0">📝 Submit a Movie Review:</h4>
+        
+        <div className="d-flex text-body-secondary pt-3">
+          <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div className="input-group input-group-sm mb-3">
+              <span className="input-group-text">Title</span>
+              <input
+                type="text"
+                name="reviewTitle"
+                className="form-control"
+                value={reviewTitle}
+                onChange={(e) => setReviewTitle(e.target.value)}
+              />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+              <span className="input-group-text">Rating</span>
+              <input
+                type="number"
+                name="reviewRating"
+                className="form-control"
+                min="0"
+                max="10"
+                value={reviewRating}
+                onChange={(e) => setReviewRating(e.target.value)}
+              />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+              <span className="input-group-text">Review</span>
+              <textarea
+                className="form-control"
+                name="reviewText"
+                rows="3"
+                value={reviewText}
+                onChange={(e) => setReviewText(e.target.value)}
+              ></textarea>
+            </div>
+            <button
+              className="btn btn-success"
+              onClick={handleSubmitReview}
+            >
+              Submit Review
+            </button>
+          </div>
+        </div>
+      </div> */}
     </main>
   );
 }
+
+
 
 
 // import React, { useState, useEffect } from 'react';
