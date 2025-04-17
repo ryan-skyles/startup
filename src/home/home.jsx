@@ -1,22 +1,43 @@
 import React, { useState, useEffect } from "react";
 import "./home.css";
+import { WatchedEvent, WatchedNotifier } from "./watchedNotifier";
 
 export function Home({ movies, updateMovie }) {
   const [savedMovies, setSavedMovies] = useState([]);
   const [quote, setQuote] = useState("Loading...");
   const [quoteMovie, setQuoteMovie] = useState("unknown");
   const [quoteYear, setQuoteYear] = useState("unknown");
+  const [messages, setMessages] = useState([]);
 
   const userName = localStorage.getItem("userName") || "Guest";
 
-  // Load saved movies from localStorage
   useEffect(() => {
     const savedMoviesFromStorage =
       JSON.parse(localStorage.getItem("savedMovies")) || [];
     setSavedMovies(savedMoviesFromStorage);
   }, []);
 
-  // Fetch Quote
+  useEffect(() => {
+    fetchWowQuote();
+  }, []);
+
+  useEffect(() => {
+    WatchedNotifier.addHandler(handleIncomingMessage);
+    return () => WatchedNotifier.removeHandler(handleIncomingMessage);
+  }, [messages]);
+
+  const handleIncomingMessage = (event) => {
+    let message = "";
+    if (event.type === WatchedEvent.System) {
+      message = `${event.from.split("@")[0]}: ${event.value.msg}`;
+    } else if (event.type === WatchedEvent.Start) {
+      message = `${event.from.split("@")[0]} started a game`;
+    } else if (event.type === WatchedEvent.End) {
+      message = `${event.from.split("@")[0]} scored ${event.value.score}`;
+    }
+    setMessages((prevMessages) => [...prevMessages, message]);
+  };
+
   const fetchWowQuote = () => {
     fetch("https://owen-wilson-wow-api.onrender.com/wows/random")
       .then((response) => response.json())
@@ -28,23 +49,9 @@ export function Home({ movies, updateMovie }) {
       })
       .catch((error) => console.error("Error fetching wow quote:", error));
   };
-  
-  useEffect(() => {
-    fetchWowQuote();
-  }, []);
-  
 
-
-  // Handle save movie button click
-  const saveMovie = (movie) => {
-    setSavedMovies((prevMovies) => {
-      if (prevMovies.some((saved) => saved.id === movie.id)) {
-        return prevMovies; 
-      }
-      const updatedMovies = [...prevMovies, movie];
-      localStorage.setItem("savedMovies", JSON.stringify(updatedMovies));
-      return updatedMovies;
-    });
+  const sendMessage = (msg) => {
+    WatchedNotifier.broadcastEvent(userName, WatchedEvent.System, { msg });
   };
 
   return (
@@ -62,15 +69,38 @@ export function Home({ movies, updateMovie }) {
               </button>
             </div>
           </div>
+
+          {/* 💬 WebSocket Message Section */}
+          <div className="message-box mt-4">
+            <h5>Live Messages</h5>
+            <div className="messages text-start bg-light p-2 rounded" style={{ maxHeight: "200px", overflowY: "auto" }}>
+              {messages.map((msg, index) => (
+                <div key={index} className="text-secondary small">{msg}</div>
+              ))}
+            </div>
+            <div className="input-group mt-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Send a message"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && e.target.value.trim() !== "") {
+                    sendMessage(e.target.value);
+                    e.target.value = "";
+                  }
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
-
+      {/* ... rest of your Home.jsx remains unchanged ... */}
       {/* User's Movies Section */}
-      <div className="container">
-        <div className="my-3 p-3 bg-body rounded">
-          <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
+       <div className="container">
+         <div className="my-3 p-3 bg-body rounded">
+           <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
 
-          {movies.map((movie) => (
+           {movies.map((movie) => (
             <div key={movie.id} className="d-flex text-body-secondary pt-3">
               <img
                 src={movie.image}
@@ -101,48 +131,170 @@ export function Home({ movies, updateMovie }) {
           ))}
         </div>
       </div>
-
-      {/* Placeholder for Example Movies */}
-      <div className="container">
-        <div className="my-3 p-3 bg-body rounded">
-          <h3 className="border-bottom pb-2 mb-0">Example's Movies</h3>
-
-          {movies.map((movie) => (
-            <div key={movie.id} className="d-flex text-body-secondary pt-3">
-              <img
-                src={movie.image}
-                alt={`Rank ${movie.rank}`}
-                className="bd-placeholder-img flex-shrink-0 me-2 rounded"
-                width="50"
-                height="50"
-              />
-              <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-                <div className="d-flex justify-content-between">
-                  <strong className="text-gray-dark">Movie title</strong>
-                </div>
-                <span className="d-block">Rating: 9/10</span>
-              </div>
-              <button
-                className="btn btn-light rounded-pill px-3"
-                type="button"
-                onClick={() => saveMovie(movie)}
-              >
-                <img
-                  src="SaveButton.png"
-                  width="70px"
-                  height="40px"
-                  alt="Save Button"
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
     </main>
   );
 }
 
-    
+
+
+// import React, { useState, useEffect } from "react";
+// import "./home.css";
+
+// export function Home({ movies, updateMovie }) {
+//   const [savedMovies, setSavedMovies] = useState([]);
+//   const [quote, setQuote] = useState("Loading...");
+//   const [quoteMovie, setQuoteMovie] = useState("unknown");
+//   const [quoteYear, setQuoteYear] = useState("unknown");
+
+//   const userName = localStorage.getItem("userName") || "Guest";
+
+//   // Load saved movies from localStorage
+//   useEffect(() => {
+//     const savedMoviesFromStorage =
+//       JSON.parse(localStorage.getItem("savedMovies")) || [];
+//     setSavedMovies(savedMoviesFromStorage);
+//   }, []);
+
+//   // Fetch Quote
+//   const fetchWowQuote = () => {
+//     fetch("https://owen-wilson-wow-api.onrender.com/wows/random")
+//       .then((response) => response.json())
+//       .then((data) => {
+//         const wow = data[0];
+//         setQuote(wow.full_line);
+//         setQuoteMovie(wow.movie);
+//         setQuoteYear(wow.year);
+//       })
+//       .catch((error) => console.error("Error fetching wow quote:", error));
+//   };
+  
+//   useEffect(() => {
+//     fetchWowQuote();
+//   }, []);
+  
+
+
+//   // Handle save movie button click
+//   const saveMovie = (movie) => {
+//     setSavedMovies((prevMovies) => {
+//       if (prevMovies.some((saved) => saved.id === movie.id)) {
+//         return prevMovies; 
+//       }
+//       const updatedMovies = [...prevMovies, movie];
+//       localStorage.setItem("savedMovies", JSON.stringify(updatedMovies));
+//       return updatedMovies;
+//     });
+//   };
+
+//   return (
+//     <main>
+//       <div className="container text-center">
+//         <div className="my-3 p-3 bg-body rounded">
+//           <div className="quote-box bg-light text-dark">
+//             <p className="quote">"{quote}"</p>
+//             <p className="author">
+//               — Owen Wilson in <strong>{quoteMovie}</strong> ({quoteYear})
+//             </p>
+//             <div>
+//               <button className="btn btn-primary my-3" onClick={fetchWowQuote}>
+//                 Get New Wow
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* User's Movies Section */}
+//       <div className="container">
+//         <div className="my-3 p-3 bg-body rounded">
+//           <h3 className="border-bottom pb-2 mb-0">{userName}'s Movies</h3>
+
+//           {movies.map((movie) => (
+//             <div key={movie.id} className="d-flex text-body-secondary pt-3">
+//               <img
+//                 src={movie.image}
+//                 alt={`Rank ${movie.rank}`}
+//                 className="bd-placeholder-img flex-shrink-0 me-2 rounded"
+//                 width="50"
+//                 height="50"
+//               />
+//               <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+//                 <div className="d-flex justify-content-between">
+//                   <strong className="text-gray-dark">{movie.title}</strong>
+//                 </div>
+//                 <span className="d-block">Rating: {movie.rating}</span>
+//               </div>
+//               <button
+//                 className="btn btn-light rounded-pill px-3"
+//                 type="button"
+//                 onClick={() => saveMovie(movie)}
+//               >
+//                 <img
+//                   src="SaveButton.png"
+//                   width="70px"
+//                   height="40px"
+//                   alt="Save Button"
+//                 />
+//               </button>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* Placeholder for Example Movies */}
+//       <div className="container">
+//         <div className="my-3 p-3 bg-body rounded">
+//           <h3 className="border-bottom pb-2 mb-0">Example's Movies</h3>
+
+//           {movies.map((movie) => (
+//             <div key={movie.id} className="d-flex text-body-secondary pt-3">
+//               <img
+//                 src={movie.image}
+//                 alt={`Rank ${movie.rank}`}
+//                 className="bd-placeholder-img flex-shrink-0 me-2 rounded"
+//                 width="50"
+//                 height="50"
+//               />
+//               <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+//                 <div className="d-flex justify-content-between">
+//                   <strong className="text-gray-dark">Movie title</strong>
+//                 </div>
+//                 <span className="d-block">Rating: 9/10</span>
+//               </div>
+//               <button
+//                 className="btn btn-light rounded-pill px-3"
+//                 type="button"
+//                 onClick={() => saveMovie(movie)}
+//               >
+//                 <img
+//                   src="SaveButton.png"
+//                   width="70px"
+//                   height="40px"
+//                   alt="Save Button"
+//                 />
+//               </button>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </main>
+//   );
+// }
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React, { useState, useEffect } from 'react';
 // // import { useNavigate } from 'react-router-dom';
 // import './home.css';

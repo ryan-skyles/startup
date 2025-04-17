@@ -4,11 +4,9 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
-
-// let users = [];
-// let totals = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -109,20 +107,6 @@ async function updateTotals(newTotal) {
 }
 
 
-// function updateTotals(newTotal) {
-//   const existingIndex = totals.findIndex((t) => t.name === newTotal.name);
-
-//   if (existingIndex >= 0) {
-//     totals[existingIndex] = newTotal; 
-//   } else {
-//     totals.push(newTotal); 
-//   }
-
-//   totals.sort((a, b) => b.total - a.total);
-
-//   return totals.slice(0, 10);
-// }
-
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -157,6 +141,7 @@ const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
+peerProxy(httpService);
 
 // const cookieParser = require('cookie-parser');
 // const bcrypt = require('bcryptjs');
